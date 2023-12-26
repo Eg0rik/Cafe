@@ -21,8 +21,7 @@ struct CatalogModernView: View {
     @State var offsetY:CGFloat = 0
     @State var currentIndex:CGFloat = 0
     
-        
-    @FetchRequest(fetchRequest: LocalDataRequest.shared.fetchRequest_coffeesInCatalog()) private var coffeeArray:FetchedResults<Coffee>
+    @FetchRequest(fetchRequest: CoffeeCatalog.fetchRequest()) private var coffeeArray:FetchedResults<CoffeeCatalog>
     
     var body: some View {
         
@@ -39,6 +38,7 @@ struct CatalogModernView: View {
                                     .brown.opacity(0.6),
                                     .brown.opacity(0.9)
                                 ]
+                    .reversed()
                                , startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
                 
@@ -97,7 +97,7 @@ struct CatalogModernView: View {
         .preferredColorScheme(.light)
     }
     
-    
+    //MARK: will be crushed if we dell CoffeeCatalog items, because of index
     func HeaderView() -> some View {
         
         VStack {
@@ -127,10 +127,9 @@ struct CatalogModernView: View {
 }
 
 
-// MARK: Coffee View
 struct CoffeeView:View {
     
-    var coffee:Coffee
+    var coffee:CoffeeCatalog
     var size:CGSize
     
     @State var showAddToCardView = false

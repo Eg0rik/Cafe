@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22222" systemVersion="22G120" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
-    <entity name="CoffeesInCart" representedClassName=".CoffeeCart" syncable="YES">
-        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="price" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+    <entity name="CartCoffee" representedClassName=".CartCoffee" syncable="YES">
+        <attribute name="count" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="price" attributeType="String" defaultValueString="error"/>
+        <attribute name="title" attributeType="String" defaultValueString="error"/>
     </entity>
-    <entity name="CoffeesInCatalog" representedClassName=".Coffee" syncable="YES">
-        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="CoffeeCatalog" representedClassName=".CoffeeCatalog" syncable="YES">
         <attribute name="price" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String" defaultValueString="errorCoffee"/>
     </entity>
-    <entity name="CoffeesInHistory" representedClassName=".Entity" syncable="YES">
-        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="description_" optional="YES" attributeType="String"/>
-        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+    <entity name="CoffeeHistory" representedClassName=".CoffeeHistory" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Decimal" defaultValueString="0"/>
         <attribute name="price" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="coffeesHitory" inverseEntity="Order"/>
+    </entity>
+    <entity name="Order" representedClassName=".Order" syncable="YES">
+        <attribute name="comment" optional="YES" attributeType="String"/>
+        <attribute name="orderTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="payment" optional="YES" attributeType="String"/>
+        <attribute name="total" optional="YES" attributeType="String"/>
+        <relationship name="coffeesHitory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoffeeHistory" inverseName="order" inverseEntity="CoffeeHistory"/>
     </entity>
 </model>

@@ -13,9 +13,8 @@ struct CafeApp: App {
     var body: some Scene {
         
         WindowGroup {
-            
             MainView()
-                .environment(\.managedObjectContext,Provider.shared.viewContext) //внедряем наш viewContext
+                .environment(\.managedObjectContext,Provider.shared.viewContext) 
                 .onAppear {
                     Provider.shared.loadData()
                 }

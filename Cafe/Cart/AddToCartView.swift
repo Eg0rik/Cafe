@@ -9,31 +9,24 @@ import SwiftUI
 import CoreData
 
 struct AddToCartView: View {
-
-    var provider = Provider.shared
+    
+    var coffee:CoffeeCatalog
     
     @Environment(\.dismiss) var dismiss
-    
-    var coffee:Coffee
-    
-    @State var count = 1
-    
-    var priceStr:String {
-        String(format:"%.2f",(Double(coffee.price)! * Double(count)))
-    }
+    @EnvironmentObject var coffeesCartVM:CoffeesCartViewModel //need viewModel to use func addCoffeeCart(...)
     
     var body: some View {
-        
         
         ZStack {
             
             LinearGradient(colors:
                     [
                      .brown.opacity(0.9),
-                     .brown.opacity(0.6),
+                     .brown.opacity(0.3),
                      .brown.opacity(0.2),
-                     .clear
+                     .brown.opacity(0.5)
                     ]
+                .reversed()
                            , startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea()
             
@@ -87,11 +80,8 @@ struct AddToCartView: View {
                 
                 HStack {
                     
-                    MyStepper(count: $count,range: 1...20)
-                    
-                    Spacer()
-                    
                     Button {
+                        addToCart()
                         dismiss()
                     } label: {
                         
@@ -103,8 +93,6 @@ struct AddToCartView: View {
                             .background(.brown.opacity(0.8))
                             .cornerRadius(10)
                     }
-                    
-                    Spacer()
                 }
                 .padding(.leading,15)
                 .padding(.bottom,25)
@@ -113,52 +101,14 @@ struct AddToCartView: View {
     }
 }
 
+extension AddToCartView {
+    var priceStr:String {
+        String(format:"%.2f",(Double(coffee.price)!))
+    }
+}
 
-struct MyStepper:View {
-    
-    @Binding var count:Int
-    var range:ClosedRange<Int>
-    
-    var body: some View {
-        
-        HStack {
-            
-            Button {
-                
-                if count > range.lowerBound {
-                    count -= 1
-                }
-            } label: {
-                Image(systemName: "minus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width:20,height: 20)
-                    .foregroundStyle(count > range.lowerBound ? .black : .gray)
-            }
-            .padding()
-            .background(.gray.opacity(0.2))
-            .cornerRadius(10)
-            
-            Text(String(count))
-                .font(.system(size: 25))
-                .frame(width:45)
-            
-            Button {
-                
-                if count < range.upperBound {
-                    count += 1
-                }
-                
-            } label: {
-                Image(systemName: "plus")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width:20,height:20)
-                    .foregroundStyle(count < range.upperBound ? .black : .gray)
-            }
-            .padding()
-            .background(.gray.opacity(0.2))
-            .cornerRadius(10)
-        }
+extension AddToCartView {
+    func addToCart() {
+        coffeesCartVM.addCoffeeCart(title: coffee.title, price: coffee.price)
     }
 }

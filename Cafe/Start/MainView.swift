@@ -10,6 +10,10 @@ import SwiftUI
 struct MainView: View {
     
     @State var tabSelected = TabBarItem.menuView
+    @State var isCartSheetPresented = false
+    
+    @StateObject var coffeesCartViewModel = CoffeesCartViewModel()
+    @StateObject var orderViewModel = OrderViewModel()
     
     var body: some View {
         
@@ -17,15 +21,29 @@ struct MainView: View {
             
             CatalogModernView()
                 .tag(TabBarItem.menuView)
+                .environmentObject(coffeesCartViewModel)
+//
+//            MapView()
+//                .tag(TabBarItem.mapView)
             
-            MapView()
-                .tag(TabBarItem.mapView)
-            
-            CartView()
-                .tag(TabBarItem.cartView)
+            HistoryView()
+                .tag(TabBarItem.historyView)
+                .environmentObject(orderViewModel)
         }
         .overlay(alignment: .bottom) {
             TabBarView(tabSelected: $tabSelected)
+        }
+        .onChange(of: tabSelected) { oldValue, newValue in
+            
+            if newValue == .cartView {
+                isCartSheetPresented = true
+                tabSelected = oldValue
+            }
+        }
+        .sheet(isPresented: $isCartSheetPresented) {
+            CartView()
+                .environmentObject(coffeesCartViewModel)
+                .environmentObject(orderViewModel)
         }
     }
 }

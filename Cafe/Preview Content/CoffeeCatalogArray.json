@@ -1,0 +1,43 @@
+
+[
+  {
+    "title" : "Flat White",
+    "price" : "4.1"
+  },
+  {
+    "price" : "6.4",
+    "title" : "Cappuccino"
+  },
+  {
+    "price" : "3.99",
+    "title" : "Pumpkin Cream Cold Brew"
+  },
+  {
+    "price" : "4.24",
+    "title" : "Starbucks® Cold Brew Coffee with Milk"
+  },
+  {
+    "price" : "6.9",
+    "title" : "Peppermint White Hot Chocolate"
+  },
+  {
+    "title" : "Cinnamon Caramel Cream Cold Brew",
+    "price" : "7.1"
+  },
+  {
+    "title" : "Pumpkin Spice Latte",
+    "price" : "3.9"
+  },
+  {
+    "price" : "4.8",
+    "title" : "Caffè Latte"
+  },
+  {
+    "price" : "3.2",
+    "title" : "Caramel Brulée Latte"
+  },
+  {
+    "title" : "Gingerbread Latte",
+    "price" : "5.2"
+  }
+]
