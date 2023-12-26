@@ -22,7 +22,7 @@ struct CatalogModernView: View {
     @State var currentIndex:CGFloat = 0
     
         
-    @FetchRequest(fetchRequest: LocalDataRequest.shared.fetchRequest_coffeesInCatalog()) private var coffeeArray:FetchedResults<Coffee>
+    @FetchRequest(fetchRequest: CoffeeCatalog.fetchRequest()) private var coffeeArray:FetchedResults<CoffeeCatalog>
     
     var body: some View {
         
@@ -102,25 +102,25 @@ struct CatalogModernView: View {
         
         VStack {
             
-            GeometryReader {
-                
-                let size = $0.size
-                
-                VStack {
-                    
-                    Text("\(coffeeArray[currentIndex.int].title)")
-                        .font(.title.bold())
-                        .multilineTextAlignment(.center)
-                    
-                    Text("\(coffeeArray[currentIndex.int].price)$")
-                        .font(.title)
-                        .opacity(0.5)
-                    
-                }
-                .animation(.easeInOut, value: currentIndex)
-                .frame(width: size.width-20)
-                .padding(.horizontal,15)
-            }
+//            GeometryReader {
+//                
+//                let size = $0.size
+//                
+//                VStack {
+//                    
+//                    Text("\(coffeeArray[currentIndex.int].title)")
+//                        .font(.title.bold())
+//                        .multilineTextAlignment(.center)
+//                    
+//                    Text("\(coffeeArray[currentIndex.int].price)$")
+//                        .font(.title)
+//                        .opacity(0.5)
+//                    
+//                }
+//                .animation(.easeInOut, value: currentIndex)
+//                .frame(width: size.width-20)
+//                .padding(.horizontal,15)
+//            }
         }
         .padding(.top,10)
     }
@@ -130,7 +130,7 @@ struct CatalogModernView: View {
 // MARK: Coffee View
 struct CoffeeView:View {
     
-    var coffee:Coffee
+    var coffee:CoffeeCatalog
     var size:CGSize
     
     @State var showAddToCardView = false
